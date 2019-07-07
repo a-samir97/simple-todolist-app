@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for items in all_items%}
+    <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        {{items.id}}
+      </p>
+      <a href="#" class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        {% if items.completed%}
+          <p style="text-decoration: line-through;">{{items.task}}</p>
+        {% else %}
+          <p class="uncompleted-task">{{items.task}}</p>
+        {% endif %}
+
+        <time datetime="2016-1-1">{{items.date}}</time>
+      </div>
+    </div>
+    <footer class="card-footer">
+      {% if items.completed%}
+        <a href="{% url 'todo:unfinished-todo' items.id %}" class="card-footer-item button is-success">Unfinished</a>
+      {% else %}
+        <a href="{% url 'todo:finished-todo' items.id %}" class="card-footer-item button is-success">finished</a>
+      {% endif %}
+
+      <a href="{% url 'todo:update-todo' items.id %}" class="card-footer-item button is-info">Edit</a>
+      <a href="{% url 'todo:delete-todo' items.id %}" class="card-footer-item button is-danger">Delete</a>
+    </footer>
+    </div>
+{% endfor %}
+{% endblock %}

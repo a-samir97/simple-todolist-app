@@ -1,0 +1,5 @@
+<form class="" action="{% url 'todo:update-todo' item.id %}" method="post">
+  {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Update Task" class="button is-success"/>
+</form>
